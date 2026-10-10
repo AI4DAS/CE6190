@@ -33,7 +33,7 @@ ENV_PYTHON="$(conda run -n "${ENV_NAME}" python -c 'import sys; print(sys.execut
 "${ENV_PYTHON}" - <<'PY' > "${PROJECT_ROOT}/results/system/environment.txt"
 import importlib.metadata as md
 import platform
-packages = ["torch", "torchvision", "diffusers", "transformers", "accelerate", "peft", "huggingface_hub", "safetensors", "datasets", "open_clip_torch", "timm", "numpy", "pandas", "scipy", "scikit-learn", "matplotlib", "Pillow"]
+packages = ["torch", "torchvision", "diffusers", "transformers", "accelerate", "peft", "huggingface_hub", "safetensors", "datasets", "open_clip_torch", "timm", "numpy", "pandas", "scipy", "scikit-learn", "matplotlib", "Pillow", "tensorboard"]
 print(f"python={platform.python_version()}")
 for name in packages:
     try:

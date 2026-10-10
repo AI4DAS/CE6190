@@ -1,0 +1,8 @@
+{
+  "method": "dreambooth",
+  "smoke_run_dir": "outputs/smoke/dreambooth/run_20261010_023942",
+  "prompt": "a photo of sks dog",
+  "seed": 42,
+  "num_inference_steps": 10,
+  "checkpoint_load_success": true
+}

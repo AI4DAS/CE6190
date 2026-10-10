@@ -1,0 +1,8 @@
+{
+  "method": "lora",
+  "smoke_run_dir": "outputs/smoke/lora/run_20261010_024041",
+  "prompt": "a photo of sks dog",
+  "seed": 42,
+  "num_inference_steps": 10,
+  "checkpoint_load_success": true
+}

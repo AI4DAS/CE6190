@@ -1,0 +1,8 @@
+{
+  "method": "textual_inversion",
+  "smoke_run_dir": "outputs/smoke/textual_inversion/run_20261010_024116",
+  "prompt": "a photo of <sks-dog>",
+  "seed": 42,
+  "num_inference_steps": 10,
+  "checkpoint_load_success": true
+}

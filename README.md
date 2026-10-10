@@ -61,14 +61,22 @@ Generation refuses to overwrite existing images. Move or assign a new experiment
 
 Each job uses one independent MIG instance. Do not use distributed training across MIG instances.
 
+Prepare the shared deterministic prior-preservation set once before starting DreamBooth and LoRA. This avoids concurrent jobs racing while writing the same class-image directory:
+
 ```bash
 source scripts/mig_devices.sh
-CUDA_VISIBLE_DEVICES="$MIG0" nohup bash scripts/jobs/train_dreambooth_pilot.sh > logs/train_dreambooth_pilot.nohup.log 2>&1 &
-CUDA_VISIBLE_DEVICES="$MIG1" nohup bash scripts/jobs/train_lora_pilot.sh > logs/train_lora_pilot.nohup.log 2>&1 &
-CUDA_VISIBLE_DEVICES="$MIG2" nohup bash scripts/jobs/train_ti_pilot.sh > logs/train_ti_pilot.nohup.log 2>&1 &
+CUDA_VISIBLE_DEVICES="$MIG3" bash scripts/jobs/prepare_class_images.sh
+```
+
+```bash
+source scripts/mig_devices.sh
+RUN_ID="dog2_db_s800_seed42" CUDA_VISIBLE_DEVICES="$MIG0" nohup bash scripts/jobs/train_dreambooth_pilot.sh > logs/train_dreambooth_pilot.nohup.log 2>&1 &
+RUN_ID="dog2_lora_r16_s800_seed42" CUDA_VISIBLE_DEVICES="$MIG1" nohup bash scripts/jobs/train_lora_pilot.sh > logs/train_lora_pilot.nohup.log 2>&1 &
+RUN_ID="dog2_ti_s3000_seed42" CUDA_VISIBLE_DEVICES="$MIG2" nohup bash scripts/jobs/train_ti_pilot.sh > logs/train_ti_pilot.nohup.log 2>&1 &
 ```
 
 Monitor with `tail -f logs/<job>.log`, `watch -n 2 nvidia-smi`, and `ps -ef | grep '[p]ython'`.
+For an experiment-aware summary, run `bash scripts/check_training_status.sh`.
 
 Rough planning estimates on one 1g.35gb H200 MIG slice (26 SM, 33,280 MiB), to be replaced by measurements:
 

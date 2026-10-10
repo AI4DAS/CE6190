@@ -19,4 +19,5 @@ Pillow==11.1.0
 PyYAML==6.0.2
 sentencepiece==0.2.0
 protobuf==5.29.3
+tensorboard==2.19.0
 
