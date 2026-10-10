@@ -1,0 +1,1 @@
+method,dataset,subject,training_time_sec,peak_vram_gb,checkpoint_size_mb,trainable_parameters,inference_time_sec,num_reference_images

@@ -1,0 +1,11 @@
+project_name: personalization-benchmark
+base_model: stable-diffusion-v1-5/stable-diffusion-v1-5
+local_base_model: models/base/stable-diffusion-v1-5
+resolution: 512
+mixed_precision: fp16
+seed: 42
+generation:
+  num_inference_steps: 50
+  guidance_scale: 7.5
+  seeds: [42, 123, 456, 789]
+

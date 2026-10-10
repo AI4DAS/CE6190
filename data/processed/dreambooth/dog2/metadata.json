@@ -1,0 +1,18 @@
+{
+  "dataset": "dreambooth",
+  "subject_id": "dog2",
+  "class_name": "dog",
+  "num_images": 6,
+  "instance_token": "sks",
+  "instance_prompt": "a photo of sks dog",
+  "source_repository": "https://github.com/google/dreambooth",
+  "source_paths": [
+    "data/dreambooth/upstream/dataset/dog2/00.jpg",
+    "data/dreambooth/upstream/dataset/dog2/01.jpg",
+    "data/dreambooth/upstream/dataset/dog2/02.jpg",
+    "data/dreambooth/upstream/dataset/dog2/03.jpg",
+    "data/dreambooth/upstream/dataset/dog2/04.jpg",
+    "data/dreambooth/upstream/dataset/dog2/05.jpg"
+  ],
+  "identifiable_humans_excluded": true
+}

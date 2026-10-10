@@ -1,0 +1,11 @@
+method: textual_inversion
+train_steps: 3000
+learning_rate: 5.0e-4
+placeholder_token: <sks-dog>
+initializer_token: dog
+resolution: 512
+train_batch_size: 1
+gradient_accumulation_steps: 4
+mixed_precision: fp16
+seed: 42
+

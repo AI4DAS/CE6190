@@ -1,0 +1,10 @@
+subjects:
+  - dataset: dreambooth
+    subject_id: dog2
+    class_name: dog
+    instance_token: sks
+    instance_prompt: a photo of sks dog
+    image_dir: data/processed/dreambooth/dog2/images
+    reference_image: data/processed/dreambooth/dog2/images/00.jpg
+    pilot: true
+

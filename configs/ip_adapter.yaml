@@ -1,0 +1,11 @@
+method: ip_adapter_plus
+repository: h94/IP-Adapter
+subfolder: models
+weight_name: ip-adapter-plus_sd15.bin
+image_encoder_subfolder: models/image_encoder
+scale: 0.7
+resolution: 512
+num_inference_steps: 50
+guidance_scale: 7.5
+seeds: [42, 123, 456, 789]
+
