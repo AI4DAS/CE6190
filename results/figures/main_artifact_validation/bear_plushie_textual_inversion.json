@@ -1,0 +1,13 @@
+{
+  "subject": "bear_plushie",
+  "method": "textual_inversion",
+  "status": "PASS",
+  "run_dir": "outputs/training/textual_inversion/bear_plushie_ti_s3000_seed42",
+  "prompt": "a photo of <sks-bear-plushie>",
+  "seed": 42,
+  "inference_steps": 10,
+  "pipeline_load_time_sec": 4.4419970759918215,
+  "generation_latency_sec": 0.708189527009381,
+  "peak_allocated_vram_gb": 2.6360220909118652,
+  "output_image": "results/figures/main_artifact_validation/bear_plushie_textual_inversion.png"
+}

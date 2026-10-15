@@ -1,0 +1,13 @@
+{
+  "subject": "luggage_backpack1",
+  "method": "dreambooth",
+  "status": "PASS",
+  "run_dir": "outputs/training/dreambooth/luggage_backpack1_db_s800_seed42",
+  "prompt": "a photo of sks backpack",
+  "seed": 42,
+  "inference_steps": 10,
+  "pipeline_load_time_sec": 1.6622136040095938,
+  "generation_latency_sec": 0.657300047998433,
+  "peak_allocated_vram_gb": 2.6360220909118652,
+  "output_image": "results/figures/main_artifact_validation/luggage_backpack1_dreambooth.png"
+}

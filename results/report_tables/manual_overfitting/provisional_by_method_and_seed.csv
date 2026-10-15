@@ -1,0 +1,17 @@
+seed,method,method_label,background_leakage,pose_copying,composition_copying
+42,dreambooth,DreamBooth,0.9375,1.3333333333333333,1.1458333333333333
+42,ip_adapter_plus,IP-Adapter Plus,2.0,2.0,2.0
+42,lora,DreamBooth-LoRA,0.7708333333333334,1.0625,0.7916666666666666
+42,textual_inversion,Textual Inversion,0.4583333333333333,0.16666666666666666,0.041666666666666664
+123,dreambooth,DreamBooth,0.8125,1.2916666666666667,1.1666666666666667
+123,ip_adapter_plus,IP-Adapter Plus,2.0,2.0,2.0
+123,lora,DreamBooth-LoRA,0.6041666666666666,1.1041666666666667,0.9375
+123,textual_inversion,Textual Inversion,0.25,0.22916666666666666,0.10416666666666667
+456,dreambooth,DreamBooth,0.9375,1.5,1.4583333333333333
+456,ip_adapter_plus,IP-Adapter Plus,2.0,2.0,2.0
+456,lora,DreamBooth-LoRA,0.5416666666666666,1.0625,0.9375
+456,textual_inversion,Textual Inversion,0.25,0.375,0.3541666666666667
+789,dreambooth,DreamBooth,0.8958333333333334,1.25,1.125
+789,ip_adapter_plus,IP-Adapter Plus,2.0,2.0,2.0
+789,lora,DreamBooth-LoRA,0.6458333333333334,0.9375,0.875
+789,textual_inversion,Textual Inversion,0.125,0.10416666666666667,0.14583333333333334

@@ -25,7 +25,11 @@ def main() -> None:
         image = pipe(args.prompt, num_inference_steps=50, guidance_scale=7.5, generator=generator).images[0]
         image.save(path, quality=95)
         print(f"CLASS_IMAGE {index + 1}/{args.num_images} {path}", flush=True)
-    (args.output_dir / "metadata.json").write_text(json.dumps({"prompt": args.prompt, "num_images": args.num_images, "seed_start": args.seed, "model": str(args.model), "generation_steps": 50, "guidance_scale": 7.5}, indent=2) + "\n")
+    # Diffusers DreamBooth examples enumerate every entry in class_data_dir and
+    # attempt to open it with Pillow. Keep provenance beside, not inside, the
+    # image-only directory.
+    metadata_path = args.output_dir.parent / f"{args.output_dir.name}_metadata.json"
+    metadata_path.write_text(json.dumps({"prompt": args.prompt, "num_images": args.num_images, "seed_start": args.seed, "model": str(args.model), "generation_steps": 50, "guidance_scale": 7.5}, indent=2) + "\n")
     count = len(list(args.output_dir.glob("*.jpg")))
     if count < args.num_images:
         raise RuntimeError(f"Expected {args.num_images} class images, found {count}")

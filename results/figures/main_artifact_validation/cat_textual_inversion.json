@@ -1,0 +1,13 @@
+{
+  "subject": "cat",
+  "method": "textual_inversion",
+  "status": "PASS",
+  "run_dir": "outputs/training/textual_inversion/cat_ti_s3000_seed42",
+  "prompt": "a photo of <sks-cat>",
+  "seed": 42,
+  "inference_steps": 10,
+  "pipeline_load_time_sec": 3.4617163429938955,
+  "generation_latency_sec": 0.6932243530027336,
+  "peak_allocated_vram_gb": 2.6360220909118652,
+  "output_image": "results/figures/main_artifact_validation/cat_textual_inversion.png"
+}

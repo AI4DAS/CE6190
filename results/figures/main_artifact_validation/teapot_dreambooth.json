@@ -1,0 +1,13 @@
+{
+  "subject": "teapot",
+  "method": "dreambooth",
+  "status": "PASS",
+  "run_dir": "outputs/training/dreambooth/teapot_db_s800_seed42",
+  "prompt": "a photo of sks teapot",
+  "seed": 42,
+  "inference_steps": 10,
+  "pipeline_load_time_sec": 3.8008296729967697,
+  "generation_latency_sec": 0.6575588900013827,
+  "peak_allocated_vram_gb": 2.6360220909118652,
+  "output_image": "results/figures/main_artifact_validation/teapot_dreambooth.png"
+}

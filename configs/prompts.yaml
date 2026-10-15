@@ -7,29 +7,35 @@ subjects:
         personalized: a photo of sks dog
         textual_inversion: a photo of <sks-dog>
         ip_adapter: a photo of a dog
+        evaluation: a photo of a dog
       P1:
         category: background
         personalized: a photo of sks dog on a beach
         textual_inversion: a photo of <sks-dog> on a beach
         ip_adapter: a dog on a beach
+        evaluation: a photo of a dog on a beach
       P2:
         category: background
         personalized: a photo of sks dog in the snow
         textual_inversion: a photo of <sks-dog> in the snow
         ip_adapter: a dog in the snow
+        evaluation: a photo of a dog in the snow
       P3:
         category: composition
         personalized: a photo of sks dog inside a modern kitchen
         textual_inversion: a photo of <sks-dog> inside a modern kitchen
         ip_adapter: a dog inside a modern kitchen
+        evaluation: a photo of a dog inside a modern kitchen
       P4:
         category: attribute
         personalized: a photo of sks dog wearing a red hat
         textual_inversion: a photo of <sks-dog> wearing a red hat
         ip_adapter: a dog wearing a red hat
+        evaluation: a photo of a dog wearing a red hat
       P5:
         category: style
         personalized: a watercolor painting of sks dog
         textual_inversion: a watercolor painting of <sks-dog>
         ip_adapter: a watercolor painting of a dog
+        evaluation: a watercolor painting of a dog
 

@@ -1,0 +1,13 @@
+{
+  "subject": "pet_dog1",
+  "method": "lora",
+  "status": "PASS",
+  "run_dir": "outputs/training/lora/pet_dog1_lora_r16_s800_seed42",
+  "prompt": "a photo of sks dog",
+  "seed": 42,
+  "inference_steps": 10,
+  "pipeline_load_time_sec": 1.3847516550013097,
+  "generation_latency_sec": 0.702931923995493,
+  "peak_allocated_vram_gb": 2.6419615745544434,
+  "output_image": "results/figures/main_artifact_validation/pet_dog1_lora.png"
+}

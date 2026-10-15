@@ -1,0 +1,70 @@
+subjects:
+  dog2:
+    dataset: dreambooth
+    category: animal
+    class_name: dog
+    reference_dir: data/processed/dreambooth/dog2/images
+  cat:
+    dataset: dreambooth
+    category: animal
+    class_name: cat
+    reference_dir: data/processed/dreambooth/cat/images
+  pet_dog1:
+    dataset: customconcept101
+    category: animal
+    class_name: dog
+    reference_dir: data/processed/customconcept101/pet_dog1/images
+  bear_plushie:
+    dataset: dreambooth
+    category: soft_texture
+    class_name: stuffed animal
+    reference_dir: data/processed/dreambooth/bear_plushie/images
+  robot_toy:
+    dataset: dreambooth
+    category: rigid_object
+    class_name: toy
+    reference_dir: data/processed/dreambooth/robot_toy/images
+  teapot:
+    dataset: dreambooth
+    category: rigid_object
+    class_name: teapot
+    reference_dir: data/processed/dreambooth/teapot/images
+  colorful_sneaker:
+    dataset: dreambooth
+    category: wearable_product
+    class_name: sneaker
+    reference_dir: data/processed/dreambooth/colorful_sneaker/images
+  luggage_backpack1:
+    dataset: customconcept101
+    category: wearable_product
+    class_name: backpack
+    reference_dir: data/processed/customconcept101/luggage_backpack1/images
+
+prompts:
+  P0: {category: identity, template: "a photo of a {class_name}"}
+  P1: {category: background_change, template: "a photo of a {class_name} on a beach"}
+  P2: {category: context_change, template: "a photo of a {class_name} inside a modern kitchen"}
+  P3: {category: attribute_change, template: "a photo of a {class_name} with a red accessory"}
+  P4: {category: composition_change, template: "a photo of a {class_name} on a wooden table"}
+  P5: {category: style_change, template: "a watercolor painting of a {class_name}"}
+
+seeds: [42, 123, 456, 789]
+
+dreamo:
+  version: v1.1
+  resolution: 768
+  inference_steps: 12
+  guidance_scale: 4.5
+  quantization: int8
+  offload: true
+  reference_task: ip
+  reference_count: 1
+
+uno:
+  model_type: flux-dev-fp8
+  resolution: 512
+  inference_steps: 25
+  guidance_scale: 4.0
+  offload: true
+  lora_rank: 512
+  reference_count: 1

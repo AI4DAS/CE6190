@@ -7,4 +7,5 @@ conda run -n "${ENV_NAME}" python "${PROJECT_ROOT}/src/visualization/dataset_sum
 if [[ -f "${PROJECT_ROOT}/outputs/ip_adapter/dreambooth/dog2/P0/seed_42.png" ]]; then
   conda run -n "${ENV_NAME}" python "${PROJECT_ROOT}/src/visualization/ip_adapter_grid.py" --project-root "${PROJECT_ROOT}" --seed 42
 fi
+conda run -n "${ENV_NAME}" python "${PROJECT_ROOT}/src/visualization/build_pilot_report.py" --project-root "${PROJECT_ROOT}"
 

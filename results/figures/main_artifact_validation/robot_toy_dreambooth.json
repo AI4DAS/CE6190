@@ -1,0 +1,13 @@
+{
+  "subject": "robot_toy",
+  "method": "dreambooth",
+  "status": "PASS",
+  "run_dir": "outputs/training/dreambooth/robot_toy_db_s800_seed42",
+  "prompt": "a photo of sks toy",
+  "seed": 42,
+  "inference_steps": 10,
+  "pipeline_load_time_sec": 2.574760304996744,
+  "generation_latency_sec": 0.6595064230059506,
+  "peak_allocated_vram_gb": 2.6360220909118652,
+  "output_image": "results/figures/main_artifact_validation/robot_toy_dreambooth.png"
+}

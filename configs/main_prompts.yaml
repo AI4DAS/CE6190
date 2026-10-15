@@ -1,0 +1,38 @@
+prompt_templates:
+  P0:
+    category: identity
+    personalized: "a photo of {instance_token} {class_name}"
+    textual_inversion: "a photo of {placeholder_token}"
+    clean: "a photo of a {class_name}"
+  P1:
+    category: background_change
+    personalized: "a photo of {instance_token} {class_name} on a beach"
+    textual_inversion: "a photo of {placeholder_token} on a beach"
+    clean: "a photo of a {class_name} on a beach"
+  P2:
+    category: context_change
+    personalized: "a photo of {instance_token} {class_name} inside a modern kitchen"
+    textual_inversion: "a photo of {placeholder_token} inside a modern kitchen"
+    clean: "a photo of a {class_name} inside a modern kitchen"
+  P3:
+    category: attribute_change
+    personalized: "a photo of {instance_token} {class_name} with a red accessory"
+    textual_inversion: "a photo of {placeholder_token} with a red accessory"
+    clean: "a photo of a {class_name} with a red accessory"
+  P4:
+    category: composition_change
+    personalized: "a photo of {instance_token} {class_name} on a wooden table"
+    textual_inversion: "a photo of {placeholder_token} on a wooden table"
+    clean: "a photo of a {class_name} on a wooden table"
+  P5:
+    category: style_change
+    personalized: "a watercolor painting of {instance_token} {class_name}"
+    textual_inversion: "a watercolor painting of {placeholder_token}"
+    clean: "a watercolor painting of a {class_name}"
+
+generation:
+  seeds: [42, 123, 456, 789]
+  resolution: 512
+  inference_steps: 50
+  guidance_scale: 7.5
+  ip_adapter_scale: 0.3

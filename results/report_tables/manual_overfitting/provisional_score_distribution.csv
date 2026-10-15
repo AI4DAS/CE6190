@@ -1,0 +1,37 @@
+method,method_label,axis,score,count,percent
+dreambooth,DreamBooth,background_leakage,0,92,47.91666666666667
+dreambooth,DreamBooth,background_leakage,1,28,14.583333333333334
+dreambooth,DreamBooth,background_leakage,2,72,37.5
+dreambooth,DreamBooth,pose_copying,0,30,15.625
+dreambooth,DreamBooth,pose_copying,1,66,34.375
+dreambooth,DreamBooth,pose_copying,2,96,50.0
+dreambooth,DreamBooth,composition_copying,0,41,21.354166666666664
+dreambooth,DreamBooth,composition_copying,1,67,34.89583333333333
+dreambooth,DreamBooth,composition_copying,2,84,43.75
+lora,DreamBooth-LoRA,background_leakage,0,110,57.291666666666664
+lora,DreamBooth-LoRA,background_leakage,1,41,21.354166666666664
+lora,DreamBooth-LoRA,background_leakage,2,41,21.354166666666664
+lora,DreamBooth-LoRA,pose_copying,0,42,21.875
+lora,DreamBooth-LoRA,pose_copying,1,100,52.083333333333336
+lora,DreamBooth-LoRA,pose_copying,2,50,26.041666666666668
+lora,DreamBooth-LoRA,composition_copying,0,60,31.25
+lora,DreamBooth-LoRA,composition_copying,1,94,48.95833333333333
+lora,DreamBooth-LoRA,composition_copying,2,38,19.791666666666664
+textual_inversion,Textual Inversion,background_leakage,0,145,75.52083333333334
+textual_inversion,Textual Inversion,background_leakage,1,42,21.875
+textual_inversion,Textual Inversion,background_leakage,2,5,2.604166666666667
+textual_inversion,Textual Inversion,pose_copying,0,150,78.125
+textual_inversion,Textual Inversion,pose_copying,1,42,21.875
+textual_inversion,Textual Inversion,pose_copying,2,0,0.0
+textual_inversion,Textual Inversion,composition_copying,0,161,83.85416666666666
+textual_inversion,Textual Inversion,composition_copying,1,31,16.145833333333336
+textual_inversion,Textual Inversion,composition_copying,2,0,0.0
+ip_adapter_plus,IP-Adapter Plus,background_leakage,0,0,0.0
+ip_adapter_plus,IP-Adapter Plus,background_leakage,1,0,0.0
+ip_adapter_plus,IP-Adapter Plus,background_leakage,2,192,100.0
+ip_adapter_plus,IP-Adapter Plus,pose_copying,0,0,0.0
+ip_adapter_plus,IP-Adapter Plus,pose_copying,1,0,0.0
+ip_adapter_plus,IP-Adapter Plus,pose_copying,2,192,100.0
+ip_adapter_plus,IP-Adapter Plus,composition_copying,0,0,0.0
+ip_adapter_plus,IP-Adapter Plus,composition_copying,1,0,0.0
+ip_adapter_plus,IP-Adapter Plus,composition_copying,2,192,100.0

@@ -2,17 +2,21 @@
 .venv/
 __pycache__/
 *.py[cod]
-logs/*.log
-models/base/stable-diffusion-v1-5/
-models/ip_adapter/IP-Adapter/
-data/dreambooth/dataset/
-data/customconcept101/dataset/
-data/customconcept101/benchmark_dataset.zip
-data/dreambooth/upstream/
-data/customconcept101/upstream/
+
+# Downloaded datasets, checkpoints, generated outputs, logs, and third-party
+# repositories are intentionally kept out of the lightweight GitHub release.
+data/
+logs/
+models/
+outputs/
 third_party/
-models/personalized/
-data/processed/class_images/
-outputs/*/*/
-!outputs/.gitkeep
+
+# Large review/export bundles are distributed separately through cloud storage.
+results/exports/
+results/figures/main_experiment/per_subject/
+results/figures/main_experiment/background_leakage_review/
+results/figures/ablation/lora/
+results/figures/modern_extension/reference_conditioned_comparison/
+results/figures/modern_extension/background_leakage_review/
+results/figures/modern_extension/ip_adapter_scale03_background_review/
 

@@ -1,0 +1,120 @@
+subjects:
+  dog2:
+    dataset: dreambooth
+    category: animal
+    class_name: dog
+    source_dir: data/dreambooth/upstream/dataset/dog2
+    image_dir: data/processed/dreambooth/dog2/images
+    expected_images: 6
+    instance_token: sks
+    instance_prompt: a photo of sks dog
+    class_prompt: a photo of a dog
+    class_dir: data/processed/class_images/dog_sd15_200
+    placeholder_token: <sks-dog>
+    initializer_token: dog
+    completed_pilot: true
+
+  cat:
+    dataset: dreambooth
+    category: animal
+    class_name: cat
+    source_dir: data/dreambooth/upstream/dataset/cat
+    image_dir: data/processed/dreambooth/cat/images
+    expected_images: 5
+    instance_token: sks
+    instance_prompt: a photo of sks cat
+    class_prompt: a photo of a cat
+    class_dir: data/processed/class_images/cat_sd15_200
+    placeholder_token: <sks-cat>
+    initializer_token: cat
+    completed_pilot: false
+
+  pet_dog1:
+    dataset: customconcept101
+    category: animal
+    class_name: dog
+    source_dir: data/customconcept101/dataset/benchmark_dataset/pet_dog1
+    image_dir: data/processed/customconcept101/pet_dog1/images
+    expected_images: 8
+    instance_token: sks
+    instance_prompt: a photo of sks dog
+    class_prompt: a photo of a dog
+    class_dir: data/processed/class_images/dog_sd15_200
+    placeholder_token: <sks-dog-pet1>
+    initializer_token: dog
+    completed_pilot: false
+
+  bear_plushie:
+    dataset: dreambooth
+    category: soft_texture
+    class_name: stuffed animal
+    source_dir: data/dreambooth/upstream/dataset/bear_plushie
+    image_dir: data/processed/dreambooth/bear_plushie/images
+    expected_images: 5
+    instance_token: sks
+    instance_prompt: a photo of sks stuffed animal
+    class_prompt: a photo of a stuffed animal
+    class_dir: data/processed/class_images/stuffed_animal_sd15_200
+    placeholder_token: <sks-bear-plushie>
+    initializer_token: toy
+    completed_pilot: false
+
+  robot_toy:
+    dataset: dreambooth
+    category: rigid_object
+    class_name: toy
+    source_dir: data/dreambooth/upstream/dataset/robot_toy
+    image_dir: data/processed/dreambooth/robot_toy/images
+    expected_images: 5
+    instance_token: sks
+    instance_prompt: a photo of sks toy
+    class_prompt: a photo of a toy
+    class_dir: data/processed/class_images/toy_sd15_200
+    placeholder_token: <sks-robot-toy>
+    initializer_token: toy
+    completed_pilot: false
+
+  teapot:
+    dataset: dreambooth
+    category: rigid_object
+    class_name: teapot
+    source_dir: data/dreambooth/upstream/dataset/teapot
+    image_dir: data/processed/dreambooth/teapot/images
+    expected_images: 5
+    instance_token: sks
+    instance_prompt: a photo of sks teapot
+    class_prompt: a photo of a teapot
+    class_dir: data/processed/class_images/teapot_sd15_200
+    placeholder_token: <sks-teapot>
+    initializer_token: teapot
+    completed_pilot: false
+
+  colorful_sneaker:
+    dataset: dreambooth
+    category: wearable_product
+    class_name: sneaker
+    source_dir: data/dreambooth/upstream/dataset/colorful_sneaker
+    image_dir: data/processed/dreambooth/colorful_sneaker/images
+    expected_images: 5
+    instance_token: sks
+    instance_prompt: a photo of sks sneaker
+    class_prompt: a photo of a sneaker
+    class_dir: data/processed/class_images/sneaker_sd15_200
+    placeholder_token: <sks-colorful-sneaker>
+    initializer_token: sneaker
+    completed_pilot: false
+
+  luggage_backpack1:
+    dataset: customconcept101
+    category: wearable_product
+    class_name: backpack
+    source_dir: data/customconcept101/dataset/benchmark_dataset/luggage_backpack1
+    image_dir: data/processed/customconcept101/luggage_backpack1/images
+    expected_images: 5
+    instance_token: sks
+    instance_prompt: a photo of sks backpack
+    class_prompt: a photo of a backpack
+    class_dir: data/processed/class_images/backpack_sd15_200
+    placeholder_token: <sks-backpack>
+    initializer_token: backpack
+    completed_pilot: false

@@ -1,8 +1,24 @@
 # Benchmarking Subject-Driven Personalization: Fine-Tuning vs. Tuning-Free
 
-Reproducible Stable Diffusion 1.5 benchmark comparing Textual Inversion, full DreamBooth, DreamBooth-LoRA, and IP-Adapter Plus. DreamO is intentionally deferred as a separate, non-controlled modern-architecture extension.
+Reproducible Stable Diffusion 1.5 benchmark comparing Textual Inversion, full DreamBooth, DreamBooth-LoRA, and IP-Adapter Plus. The completed repository also contains controlled ablations and separately labelled DreamO/UNO modern reference-conditioning extensions; those extensions are not treated as controlled SD1.5 comparisons.
 
-The pilot subject is the non-human `dog2` subject from the official Google DreamBooth dataset. Identifiable humans and private photographs are excluded. Dataset provenance and the non-legal license summary are in `results/dataset_documentation.md`.
+The benchmark uses eight non-human subjects spanning animals, soft-texture objects, rigid objects, and products. The original pilot subject is `dog2` from the official Google DreamBooth dataset. Identifiable humans and private photographs are excluded. Dataset provenance and the non-legal license summary are in `results/dataset_documentation.md`.
+
+## Repository contents
+
+This GitHub version contains the full experiment code, configurations, metric CSVs,
+report tables, documentation, and a curated set of figures. Downloaded datasets,
+base-model weights, personalized checkpoints, generated-image directories, logs,
+third-party repositories, and large review archives are intentionally excluded.
+They can be recreated from the recorded configurations and upstream identifiers;
+unique full artifacts are distributed separately through the project archive.
+
+Start with:
+
+- `results/RESULTS_SUMMARY.md` for completed experiments and measured results.
+- `results/ABLATION_README.md` for ablation run order and reproduction commands.
+- `results/metrics/all_runs_per_image.csv` for tidy per-image metrics.
+- `results/system/ablation_validation_report.md` for output validation.
 
 ## Method inputs and outputs
 
@@ -57,7 +73,7 @@ CUDA_VISIBLE_DEVICES="$MIG3" bash scripts/evaluate_all.sh
 
 Generation refuses to overwrite existing images. Move or assign a new experiment directory before rerunning a completed experiment.
 
-## Prepared training jobs (not launched)
+## Training commands
 
 Each job uses one independent MIG instance. Do not use distributed training across MIG instances.
 
@@ -95,7 +111,7 @@ These are capacity estimates, not measured results. Concurrent first runs share 
 - Overfitting: manual 0–2 annotations for background leakage, pose copying, and composition copying. Feature similarity is supporting evidence only.
 - Compute: training time, peak VRAM, checkpoint size, trainable parameters, inference latency, and reference count are reported independently.
 
-Do not interpret the current pilot metrics as a comparison: only IP-Adapter Plus has run. Cross-dataset results will be called “cross-dataset personalization performance,” not zero-shot transfer.
+The completed single-subject pilot and eight-subject main experiment are reported separately. Cross-dataset results are described as “cross-dataset personalization performance,” not zero-shot transfer. Missing measurements remain `N/A`; no metric is inferred or fabricated.
 
 ## Upstream implementations
 

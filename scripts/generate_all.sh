@@ -6,6 +6,8 @@ if [[ -z "${CUDA_VISIBLE_DEVICES:-}" ]]; then
   echo "Set CUDA_VISIBLE_DEVICES to one MIG UUID." >&2
   exit 2
 fi
-conda run -n "${ENV_NAME}" python "${PROJECT_ROOT}/src/inference/generate_ip_adapter.py" --project-root "${PROJECT_ROOT}"
-conda run -n "${ENV_NAME}" python "${PROJECT_ROOT}/src/visualization/ip_adapter_grid.py" --project-root "${PROJECT_ROOT}" --seed 42
+for method in dreambooth lora textual_inversion ip_adapter_plus; do
+  conda run -n "${ENV_NAME}" python "${PROJECT_ROOT}/src/inference/generate_pilot_benchmark.py" \
+    --project-root "${PROJECT_ROOT}" --method "${method}"
+done
 

@@ -1,0 +1,13 @@
+{
+  "subject": "robot_toy",
+  "method": "lora",
+  "status": "PASS",
+  "run_dir": "outputs/training/lora/robot_toy_lora_r16_s800_seed42",
+  "prompt": "a photo of sks toy",
+  "seed": 42,
+  "inference_steps": 10,
+  "pipeline_load_time_sec": 1.5154388259979896,
+  "generation_latency_sec": 0.6991661670035683,
+  "peak_allocated_vram_gb": 2.6419615745544434,
+  "output_image": "results/figures/main_artifact_validation/robot_toy_lora.png"
+}

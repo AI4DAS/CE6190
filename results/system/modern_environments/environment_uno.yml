@@ -1,0 +1,6 @@
+name: environment_uno
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+prefix: /home/zwu/anaconda3/envs/environment_uno

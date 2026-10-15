@@ -1,0 +1,7 @@
+prompt_id,prompt_category,generation_prompt_dreambooth,generation_prompt_lora,generation_prompt_ti,generation_prompt_ip_adapter,evaluation_prompt
+P0,identity,a photo of sks dog,a photo of sks dog,a photo of <sks-dog>,a photo of a dog,a photo of a dog
+P1,background,a photo of sks dog on a beach,a photo of sks dog on a beach,a photo of <sks-dog> on a beach,a dog on a beach,a photo of a dog on a beach
+P2,background,a photo of sks dog in the snow,a photo of sks dog in the snow,a photo of <sks-dog> in the snow,a dog in the snow,a photo of a dog in the snow
+P3,composition,a photo of sks dog inside a modern kitchen,a photo of sks dog inside a modern kitchen,a photo of <sks-dog> inside a modern kitchen,a dog inside a modern kitchen,a photo of a dog inside a modern kitchen
+P4,attribute,a photo of sks dog wearing a red hat,a photo of sks dog wearing a red hat,a photo of <sks-dog> wearing a red hat,a dog wearing a red hat,a photo of a dog wearing a red hat
+P5,style,a watercolor painting of sks dog,a watercolor painting of sks dog,a watercolor painting of <sks-dog>,a watercolor painting of a dog,a watercolor painting of a dog
