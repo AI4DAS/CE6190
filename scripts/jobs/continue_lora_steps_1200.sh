@@ -9,8 +9,8 @@ SOURCE_CHECKPOINT="${PROJECT_ROOT}/outputs/training/lora/dog2_lora_r16_s800_seed
 OUTPUT_DIR="${PROJECT_ROOT}/outputs/ablations/lora_steps/dog2_lora_r16_s1200_seed42"
 LOG_DIR="${OUTPUT_DIR}"
 SEED=42
-PYTHON="/home/zwu/anaconda3/envs/personalization-benchmark/bin/python"
-ACCELERATE="/home/zwu/anaconda3/envs/personalization-benchmark/bin/accelerate"
+PYTHON="${PYTHON:-$(command -v python)}"
+ACCELERATE="${ACCELERATE:-$(command -v accelerate)}"
 CONFIG="${PROJECT_ROOT}/configs/accelerate_single_mig.yaml"
 SCRIPT="${PROJECT_ROOT}/third_party/diffusers/examples/dreambooth/train_dreambooth_lora.py"
 source "${PROJECT_ROOT}/scripts/jobs/_run_with_vram_monitor.sh"

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+PYTHON="${PYTHON:-$(command -v python)}"
 source "${ROOT}/scripts/mig_devices.sh"
 MIGS=("${MIG3}" "${MIG4}" "${MIG5}" "${MIG6}")
 TASKS=("dreambooth dog2" "dreambooth cat" "lora dog2" "lora cat")
@@ -15,7 +16,7 @@ pids=()
 for index in "${!TASKS[@]}"; do
   read -r method subject <<<"${TASKS[$index]}"
   CUDA_VISIBLE_DEVICES="${MIGS[$index]}" \
-    /home/zwu/anaconda3/envs/personalization-benchmark/bin/python \
+    "${PYTHON}" \
     "${ROOT}/src/inference/generate_face_corruption_checks.py" \
     --project-root "${ROOT}" --method "${method}" --subject "${subject}" --resume \
     >"${LOG}/${method}_${subject}.log" 2>&1 &

@@ -1,119 +1,149 @@
-# Benchmarking Subject-Driven Personalization: Fine-Tuning vs. Tuning-Free
+# Benchmarking Subject-Driven Image Personalization
 
-Reproducible Stable Diffusion 1.5 benchmark comparing Textual Inversion, full DreamBooth, DreamBooth-LoRA, and IP-Adapter Plus. The completed repository also contains controlled ablations and separately labelled DreamO/UNO modern reference-conditioning extensions; those extensions are not treated as controlled SD1.5 comparisons.
+Reproducible Stable Diffusion 1.5 benchmark of Textual Inversion, full
+DreamBooth, DreamBooth-LoRA, and IP-Adapter Plus. The repository also contains
+the controlled rank, training-step, reference-count, prior-preservation, and
+adapter-scale ablations used in the project. DreamO and UNO are implemented as
+separately labelled modern-backbone extensions rather than controlled SD1.5
+comparisons.
 
-The benchmark uses eight non-human subjects spanning animals, soft-texture objects, rigid objects, and products. The original pilot subject is `dog2` from the official Google DreamBooth dataset. Identifiable humans and private photographs are excluded. Dataset provenance and the non-legal license summary are in `results/dataset_documentation.md`.
+The release is source-only. It does **not** contain datasets, model weights,
+personalized checkpoints, generated-image collections, logs, or third-party
+repositories. The small `results/report_figures/` directory contains only the
+six figure assets used in the final report. See `PACKAGE_CONTENTS.md` for the
+complete inclusion/exclusion policy.
 
-## Repository contents
+## Layout
 
-This GitHub version contains the full experiment code, configurations, metric CSVs,
-report tables, documentation, and a curated set of figures. Downloaded datasets,
-base-model weights, personalized checkpoints, generated-image directories, logs,
-third-party repositories, and large review archives are intentionally excluded.
-They can be recreated from the recorded configurations and upstream identifiers;
-unique full artifacts are distributed separately through the project archive.
+- `configs/`: subjects, prompts, methods, Accelerate, and extension settings.
+- `scripts/`: setup, download, training, generation, evaluation, and ablation
+  entry points.
+- `src/data/`: deterministic dataset preparation and class-image generation.
+- `src/inference/`: SD1.5 and modern-extension inference pipelines.
+- `src/evaluation/`: DINOv2, neutral-prompt CLIP, copying, cost, and ablation
+  evaluation.
+- `src/visualization/`: contact sheets, comparison grids, and plots.
+- `results/report_figures/`: curated report result figures only.
 
-Start with:
+All generated artifacts are written below the ignored `data/`, `models/`,
+`outputs/`, `logs/`, and non-whitelisted `results/` paths.
 
-- `results/RESULTS_SUMMARY.md` for completed experiments and measured results.
-- `results/ABLATION_README.md` for ablation run order and reproduction commands.
-- `results/metrics/all_runs_per_image.csv` for tidy per-image metrics.
-- `results/system/ablation_validation_report.md` for output validation.
+## Environment and inputs
 
-## Method inputs and outputs
-
-```mermaid
-flowchart LR
-  R[Reference images] --> TI[Textual Inversion training]
-  T[Placeholder token] --> TI
-  TI --> E[Learned token embedding]
-  E --> TIG[Inference with tokenized text]
-  TIG --> I1[Generated image]
-
-  R --> DB[Full DreamBooth training]
-  P[Instance prompt] --> DB
-  DB --> M[Personalized diffusion model]
-  M --> DBG[Inference with text]
-  DBG --> I2[Generated image]
-
-  R --> L[DreamBooth-LoRA training]
-  P --> L
-  L --> W[LoRA weights]
-  B[SD 1.5 base model] --> LG[LoRA inference]
-  W --> LG
-  LG --> I3[Generated image]
-
-  R --> IP[IP-Adapter Plus inference]
-  Q[Semantic text prompt] --> IP
-  B --> IP
-  IP --> I4[Generated image]
-```
-
-- Textual Inversion trains reference images plus a placeholder token and outputs a learned embedding. Inference uses text containing that token.
-- Full DreamBooth trains reference images plus an instance prompt and outputs a complete personalized diffusion model.
-- DreamBooth-LoRA uses the same subject inputs but outputs compact LoRA weights applied to the base model at inference.
-- IP-Adapter Plus performs no subject-specific training. It conditions inference on one reference image plus ordinary semantic text.
-
-## Reproduce the completed pilot stages
+The validated environment uses Python 3.11, PyTorch with CUDA, Diffusers
+0.35.1, Transformers, Accelerate, and PEFT. Create it and fetch the pinned
+Diffusers examples:
 
 ```bash
 bash scripts/setup_env.sh
 conda activate personalization-benchmark
 bash scripts/inspect_gpu.sh
-bash scripts/download_models.sh
+```
+
+Download the official DreamBooth and CustomConcept101 sources, deterministically
+prepare all eight configured non-human subjects, and download the SD1.5 and
+IP-Adapter Plus checkpoints:
+
+```bash
 bash scripts/download_datasets.sh
-python src/visualization/dataset_contact_sheet.py \
-  --subject-dir data/processed/dreambooth/dog2 \
-  --output-dir results/figures/dataset
-
-source scripts/mig_devices.sh
-CUDA_VISIBLE_DEVICES="$MIG3" bash scripts/generate_all.sh
-CUDA_VISIBLE_DEVICES="$MIG3" bash scripts/evaluate_all.sh
+bash scripts/download_models.sh
 ```
 
-Generation refuses to overwrite existing images. Move or assign a new experiment directory before rerunning a completed experiment.
+`src/data/prepare_main_subjects.py` validates the expected image count, opens
+every image with Pillow, renames files by sorted source order, and records the
+source-to-prepared mapping locally. No dataset or model is committed.
 
-## Training commands
+## Subjects and protocol
 
-Each job uses one independent MIG instance. Do not use distributed training across MIG instances.
+The controlled benchmark uses `dog2`, `cat`, `pet_dog1`, `bear_plushie`,
+`robot_toy`, `teapot`, `colorful_sneaker`, and `luggage_backpack1`. Subject and
+dataset membership are defined in `configs/main_subjects.yaml`. Six semantic
+prompt slots and seeds 42, 123, 456, and 789 are defined in
+`configs/main_prompts.yaml`.
 
-Prepare the shared deterministic prior-preservation set once before starting DreamBooth and LoRA. This avoids concurrent jobs racing while writing the same class-image directory:
+Fine-tuned methods use all configured reference images. The principal
+IP-Adapter Plus condition uses deterministically selected reference image 00 at
+scale 0.3. Class images used for prior preservation are training auxiliaries and
+are never evaluation references.
+
+## Training
+
+Each job uses one independent visible GPU or MIG device; the code does not use
+distributed training across MIG instances. Inspect and source the detected MIG
+assignments before launch:
 
 ```bash
 source scripts/mig_devices.sh
-CUDA_VISIBLE_DEVICES="$MIG3" bash scripts/jobs/prepare_class_images.sh
 ```
+
+Prepare class images, then launch the seven non-pilot subject lanes. The
+completed `dog2` pilot uses the three explicit pilot scripts shown below.
 
 ```bash
-source scripts/mig_devices.sh
-RUN_ID="dog2_db_s800_seed42" CUDA_VISIBLE_DEVICES="$MIG0" nohup bash scripts/jobs/train_dreambooth_pilot.sh > logs/train_dreambooth_pilot.nohup.log 2>&1 &
-RUN_ID="dog2_lora_r16_s800_seed42" CUDA_VISIBLE_DEVICES="$MIG1" nohup bash scripts/jobs/train_lora_pilot.sh > logs/train_lora_pilot.nohup.log 2>&1 &
-RUN_ID="dog2_ti_s3000_seed42" CUDA_VISIBLE_DEVICES="$MIG2" nohup bash scripts/jobs/train_ti_pilot.sh > logs/train_ti_pilot.nohup.log 2>&1 &
+CUDA_VISIBLE_DEVICES="$MIG7" bash scripts/jobs/prepare_main_class_images.sh
+
+CUDA_VISIBLE_DEVICES="$MIG0" bash scripts/jobs/train_dreambooth_pilot.sh
+CUDA_VISIBLE_DEVICES="$MIG1" bash scripts/jobs/train_lora_pilot.sh
+CUDA_VISIBLE_DEVICES="$MIG2" bash scripts/jobs/train_ti_pilot.sh
+
+bash scripts/launch_main_training.sh
 ```
 
-Monitor with `tail -f logs/<job>.log`, `watch -n 2 nvidia-smi`, and `ps -ef | grep '[p]ython'`.
-For an experiment-aware summary, run `bash scripts/check_training_status.sh`.
+Full DreamBooth and LoRA use 800 steps with prior preservation; LoRA uses rank
+16. Textual Inversion uses 3,000 steps. The exact prompts, learning rates,
+precision, checkpoint paths, validation settings, and storage guards are in the
+job scripts and YAML files. Scripts refuse unsafe output collisions and write
+success/failure markers.
 
-Rough planning estimates on one 1g.35gb H200 MIG slice (26 SM, 33,280 MiB), to be replaced by measurements:
+## Generation and evaluation
 
-| Job | Expected VRAM | Expected wall time |
-|---|---:|---:|
-| Textual Inversion, 3,000 steps | 8–12 GB | 20–45 min |
-| Full DreamBooth, 800 steps, prior preservation | 12–20 GB | 15–35 min plus initial class-image generation |
-| DreamBooth-LoRA r16, 800 steps, prior preservation | 10–16 GB | 10–30 min plus initial class-image generation |
+After all checkpoints pass their load tests:
 
-These are capacity estimates, not measured results. Concurrent first runs share the same class-image directory; generate that directory once or start DreamBooth after it exists to avoid races.
+```bash
+bash scripts/launch_main_evaluation.sh
+bash scripts/run_main_evaluation_parallel.sh
+```
 
-## Evaluation
+The generation pipeline writes one JSON sidecar per image with method, subject,
+prompt, clean evaluation prompt, seed, checkpoint, scheduler, precision,
+latency, GPU, and reference information. Evaluation uses only original subject
+references:
 
-- Subject fidelity: DINOv2 (`facebook/dinov2-base`) cosine similarity, reported as mean and maximum over every reference image.
-- Prompt compliance: CLIP (`openai/clip-vit-large-patch14`) cosine similarity against the exact generation prompt.
-- Overfitting: manual 0–2 annotations for background leakage, pose copying, and composition copying. Feature similarity is supporting evidence only.
-- Compute: training time, peak VRAM, checkpoint size, trainable parameters, inference latency, and reference count are reported independently.
+- DINOv2 cosine similarity measures subject-reference proximity.
+- CLIP image-text similarity uses the clean class-name evaluation prompt, not
+  learned trigger tokens.
+- Manual 0--2 labels separately describe background, pose, and composition
+  carry-over for personalized outputs.
+- Training time, peak VRAM, trainable parameters, storage, latency, and data
+  requirements remain separate cost measurements.
 
-The completed single-subject pilot and eight-subject main experiment are reported separately. Cross-dataset results are described as “cross-dataset personalization performance,” not zero-shot transfer. Missing measurements remain `N/A`; no metric is inferred or fabricated.
+Create the main report figures from the generated metrics and metadata with:
 
-## Upstream implementations
+```bash
+bash scripts/visualize_all.sh
+python src/visualization/build_main_report.py --project-root .
+```
 
-Training invokes the official Hugging Face Diffusers v0.35.1 examples pinned under `third_party/diffusers`. The base model is `stable-diffusion-v1-5/stable-diffusion-v1-5`; adapter weights are SD1.5 `ip-adapter-plus_sd15.bin` from `h94/IP-Adapter`. Exact upstream revisions are recorded in `results/system/`.
+## Ablations
 
+The `scripts/jobs/run_task_*.sh` launchers reproduce the adapter-scale,
+LoRA-rank, training-step, reference-count, inference-corruption, and
+prior-preservation experiments. They use the predefined subsets, prompts, and
+seeds encoded in the scripts; they do not overwrite the main benchmark.
+
+Run `bash -n scripts/*.sh scripts/jobs/*.sh` before scheduling jobs. Long jobs
+are designed to be launched explicitly by the user and are not started by setup
+or download commands.
+
+## Reproducibility notes
+
+- The official Diffusers v0.35.1 training examples are fetched into the ignored
+  `third_party/diffusers/` directory by `scripts/setup_env.sh`.
+- Base and adapter revision hashes are recorded locally under
+  `results/system/` by the download scripts.
+- Experiment outputs record the Git commit, package versions, command, seed,
+  GPU/MIG identifier, and runtime where supported.
+- The modern DreamO/UNO code expects separately prepared environments and
+  upstream repositories; it is not mixed into the controlled SD1.5 ranking.
+- The source ZIP is created from the committed Git tree and contains no
+  filesystem symbolic links.

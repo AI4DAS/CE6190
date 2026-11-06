@@ -1,8 +1,0 @@
-{
-  "method": "dreambooth",
-  "smoke_run_dir": "outputs/debug/dreambooth_boundary_20steps",
-  "prompt": "a photo of sks dog",
-  "seed": 42,
-  "num_inference_steps": 10,
-  "checkpoint_load_success": true
-}

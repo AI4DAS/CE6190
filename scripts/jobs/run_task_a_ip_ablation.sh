@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-PYTHON="/home/zwu/anaconda3/envs/personalization-benchmark/bin/python"
+PYTHON="${PYTHON:-$(command -v python)}"
 GENERATOR="${PROJECT_ROOT}/src/inference/generate_ip_adapter_ablation.py"
 LOG_ROOT="${PROJECT_ROOT}/logs/ablations/task_a_ip_adapter"
 STATUS_ROOT="${PROJECT_ROOT}/outputs/experiments/task_a"

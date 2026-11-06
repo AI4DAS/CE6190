@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-PYTHON="/home/zwu/anaconda3/envs/environment_uno/bin/python"
+PYTHON="${PYTHON:-$(command -v python)}"
 OUTPUT_DIR="${PROJECT_ROOT}/outputs/modern_extension/uno"
 LOG_DIR="${PROJECT_ROOT}/logs/modern_extension"
 SEED="42,123,456,789"

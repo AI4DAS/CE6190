@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+PYTHON="${PYTHON:-$(command -v python)}"
 source "${PROJECT_ROOT}/scripts/mig_devices.sh"
 MIGS=("${MIG3}" "${MIG4}" "${MIG5}" "${MIG6}" "${MIG7}")
 SUBJECTS=(dog2 teapot bear_plushie); RANKS=(4 8 16 32 64)
@@ -22,7 +23,7 @@ weights_for(){
   else echo "outputs/ablations/task_b_rank_training/${subject}_r${rank}/pytorch_lora_weights.safetensors"; fi
 }
 GEN_TASKS=(); for subject in "${SUBJECTS[@]}"; do for rank in "${RANKS[@]}"; do GEN_TASKS+=("${subject} ${rank}"); done; done
-gen_worker(){ local lane="$1" dev="$2" i subject rank weights refs; for ((i=lane;i<${#GEN_TASKS[@]};i+=5)); do read -r subject rank <<<"${GEN_TASKS[$i]}"; weights=$(weights_for "$subject" "$rank"); refs=$(/home/zwu/anaconda3/envs/personalization-benchmark/bin/python -c "import yaml;print(yaml.safe_load(open('${PROJECT_ROOT}/configs/main_subjects.yaml'))['subjects']['${subject}']['expected_images'])"); CUDA_VISIBLE_DEVICES="${dev}" /home/zwu/anaconda3/envs/personalization-benchmark/bin/python "${PROJECT_ROOT}/src/inference/generate_lora_variant.py" --project-root "${PROJECT_ROOT}" --subject "$subject" --weights "$weights" --output-root "outputs/experiments/task_b_rank/r${rank}" --experiment task_b_rank_ablation --variant "lora_r${rank}" --rank "$rank" --n-refs "$refs" --prior on --resume >"${LOG}/generate_${subject}_r${rank}.log" 2>&1; done; }
+gen_worker(){ local lane="$1" dev="$2" i subject rank weights refs; for ((i=lane;i<${#GEN_TASKS[@]};i+=5)); do read -r subject rank <<<"${GEN_TASKS[$i]}"; weights=$(weights_for "$subject" "$rank"); refs=$("${PYTHON}" -c "import yaml;print(yaml.safe_load(open('${PROJECT_ROOT}/configs/main_subjects.yaml'))['subjects']['${subject}']['expected_images'])"); CUDA_VISIBLE_DEVICES="${dev}" "${PYTHON}" "${PROJECT_ROOT}/src/inference/generate_lora_variant.py" --project-root "${PROJECT_ROOT}" --subject "$subject" --weights "$weights" --output-root "outputs/experiments/task_b_rank/r${rank}" --experiment task_b_rank_ablation --variant "lora_r${rank}" --rank "$rank" --n-refs "$refs" --prior on --resume >"${LOG}/generate_${subject}_r${rank}.log" 2>&1; done; }
 pids=(); for lane in "${!MIGS[@]}"; do gen_worker "$lane" "${MIGS[$lane]}" & pids+=("$!"); done
 code=0; for p in "${pids[@]}"; do if ! wait "$p"; then code=1; fi; done
 if ((code)); then touch "${STATUS}/FAILED"; exit 1; fi

@@ -1,3 +1,0 @@
-experiment_id,method,dataset,subject,training_time_seconds,peak_vram_gb,checkpoint_size_mb,trainable_parameters,inference_time_seconds,num_reference_images,gpu,mig_uuid
-ip_adapter_plus_dog2_scale0.7_seedset1,ip_adapter_plus,dreambooth,dog2,0,4.2071,158.0332,0,2.9434,1,NVIDIA H200 NVL MIG 1g.35gb,MIG-9d50c02d-6036-5ad7-8817-302b8d26d7ef
-

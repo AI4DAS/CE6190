@@ -8,8 +8,8 @@ SUBJECT="${2:?usage: train_task_c_steps_lane.sh METHOD SUBJECT}"
 [[ "${SUBJECT}" =~ ^(dog2|teapot|bear_plushie)$ ]] || { echo "Invalid Task C subject" >&2; exit 2; }
 [[ -n "${CUDA_VISIBLE_DEVICES:-}" ]] || { echo "Set exactly one MIG UUID" >&2; exit 3; }
 
-PYTHON="/home/zwu/anaconda3/envs/personalization-benchmark/bin/python"
-ACCELERATE="/home/zwu/anaconda3/envs/personalization-benchmark/bin/accelerate"
+PYTHON="${PYTHON:-$(command -v python)}"
+ACCELERATE="${ACCELERATE:-$(command -v accelerate)}"
 ACCEL_CONFIG="${PROJECT_ROOT}/configs/accelerate_single_mig.yaml"
 MODEL_DIR="${PROJECT_ROOT}/models/base/stable-diffusion-v1-5"
 SUBJECT_CONFIG="${PROJECT_ROOT}/configs/main_subjects.yaml"

@@ -9,8 +9,8 @@ PRIOR="${4:?on or off}"
 OUTPUT_REL="${5:?output directory relative to project}"
 [[ "${PRIOR}" == "on" || "${PRIOR}" == "off" ]] || exit 2
 [[ -n "${CUDA_VISIBLE_DEVICES:-}" ]] || { echo "Set one MIG" >&2; exit 2; }
-PYTHON="/home/zwu/anaconda3/envs/personalization-benchmark/bin/python"
-ACCELERATE="/home/zwu/anaconda3/envs/personalization-benchmark/bin/accelerate"
+PYTHON="${PYTHON:-$(command -v python)}"
+ACCELERATE="${ACCELERATE:-$(command -v accelerate)}"
 SCRIPT="${PROJECT_ROOT}/third_party/diffusers/examples/dreambooth/train_dreambooth_lora.py"
 MODEL="${PROJECT_ROOT}/models/base/stable-diffusion-v1-5"
 CONFIG="${PROJECT_ROOT}/configs/accelerate_single_mig.yaml"

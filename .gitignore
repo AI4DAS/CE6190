@@ -5,18 +5,27 @@ __pycache__/
 
 # Downloaded datasets, checkpoints, generated outputs, logs, and third-party
 # repositories are intentionally kept out of the lightweight GitHub release.
-data/
-logs/
-models/
-outputs/
-third_party/
+/data/
+/logs/
+/models/
+/outputs/
+/third_party/
+
+# Results are local by default.  Only the small, report-facing figure whitelist
+# and its README are included in the source release.
+/results/*
+!/results/README.md
+!/results/report_figures/
+!/results/report_figures/**
+
+# Local release archives are generated beside the repository, not committed.
+*.zip
+
+# Local report-audit helpers are not part of the experiment source release.
+scripts/analyze_report_supplement.py
+scripts/build_base_annotation_review_grids.py
+scripts/summarize_base_codex_annotations.py
+scripts/upload_seed_grids_to_gdrive.sh
 
 # Large review/export bundles are distributed separately through cloud storage.
-results/exports/
-results/figures/main_experiment/per_subject/
-results/figures/main_experiment/background_leakage_review/
-results/figures/ablation/lora/
-results/figures/modern_extension/reference_conditioned_comparison/
-results/figures/modern_extension/background_leakage_review/
-results/figures/modern_extension/ip_adapter_scale03_background_review/
 

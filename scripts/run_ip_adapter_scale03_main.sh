@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-PYTHON="/home/zwu/anaconda3/envs/personalization-benchmark/bin/python"
+PYTHON="${PYTHON:-$(command -v python)}"
 LOG_DIR="${PROJECT_ROOT}/logs/main_evaluation/ip_adapter_scale03"
 source "${PROJECT_ROOT}/scripts/mig_devices.sh"
 

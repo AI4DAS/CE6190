@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-PYTHON="/home/zwu/anaconda3/envs/personalization-benchmark/bin/python"
+PYTHON="${PYTHON:-$(command -v python)}"
 LOG_DIR="${PROJECT_ROOT}/logs/ablations/generation"
 source "${PROJECT_ROOT}/scripts/mig_devices.sh"
 variants=(r4_s800 r16_s400 r16_s800 r16_s1200 r32_s800)

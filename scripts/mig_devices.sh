@@ -1,11 +1,25 @@
 #!/usr/bin/env bash
-# Generated from `nvidia-smi -L` on 2026-10-10. Re-run inspect_gpu.sh if MIG is reconfigured.
-export MIG0="MIG-eb10c6cf-0474-58a4-8e0f-7afffc48b4b3"
-export MIG1="MIG-3dc20912-6ea3-5b44-81e4-98481ef4c763"
-export MIG2="MIG-b0e5ab9b-29b6-5fa3-9664-7eb91cf3ef84"
-export MIG3="MIG-9d50c02d-6036-5ad7-8817-302b8d26d7ef"
-export MIG4="MIG-8dceb4a0-261d-5b2f-9bb9-ef41f9f65765"
-export MIG5="MIG-a4f5c260-0bbc-52cb-b5b9-98c4b9ac3251"
-export MIG6="MIG-b02034a8-d6ef-57d6-a42c-305979b1bc94"
-export MIG7="MIG-8c70a6f7-6e84-54fc-a316-08ee1d2e57f7"
+# Source this file to detect the currently configured MIG instances.  UUIDs are
+# deliberately not committed because they change when MIG is reconfigured.
 
+if ! command -v nvidia-smi >/dev/null 2>&1; then
+  echo "ERROR: nvidia-smi is unavailable; cannot detect MIG devices" >&2
+  return 1 2>/dev/null || exit 1
+fi
+
+mapfile -t _PB_MIG_UUIDS < <(
+  nvidia-smi -L | sed -n 's/.*UUID: \(MIG-[^)]*\)).*/\1/p'
+)
+if ((${#_PB_MIG_UUIDS[@]} == 0)); then
+  echo "ERROR: no MIG UUIDs found in nvidia-smi -L" >&2
+  return 1 2>/dev/null || exit 1
+fi
+
+for _pb_index in "${!_PB_MIG_UUIDS[@]}"; do
+  printf -v _pb_name 'MIG%d' "${_pb_index}"
+  export "${_pb_name}=${_PB_MIG_UUIDS[$_pb_index]}"
+done
+export MIG_COUNT="${#_PB_MIG_UUIDS[@]}"
+echo "Detected ${MIG_COUNT} MIG device(s): MIG0..MIG$((MIG_COUNT - 1))"
+
+unset _PB_MIG_UUIDS _pb_index _pb_name

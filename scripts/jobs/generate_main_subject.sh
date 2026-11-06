@@ -3,7 +3,7 @@ set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 SUBJECT="${1:?usage: generate_main_subject.sh SUBJECT}"
-PYTHON="/home/zwu/anaconda3/envs/personalization-benchmark/bin/python"
+PYTHON="${PYTHON:-$(command -v python)}"
 LOG_DIR="${PROJECT_ROOT}/logs/main_evaluation"
 SEED="42,123,456,789"
 MODEL_DIR="${PROJECT_ROOT}/models/base/stable-diffusion-v1-5"

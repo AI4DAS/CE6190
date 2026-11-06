@@ -1,9 +1,0 @@
-dataset,subject,class_name,dreambooth_lora_instance_prompt,dreambooth_lora_identifier,prior_preservation_class_prompt,textual_inversion_placeholder_token,textual_inversion_initializer_token,ip_adapter_subject_training
-dreambooth,dog2,dog,a photo of sks dog,sks,a photo of a dog,<sks-dog>,dog,none
-dreambooth,cat,cat,a photo of sks cat,sks,a photo of a cat,<sks-cat>,cat,none
-customconcept101,pet_dog1,dog,a photo of sks dog,sks,a photo of a dog,<sks-dog-pet1>,dog,none
-dreambooth,bear_plushie,stuffed animal,a photo of sks stuffed animal,sks,a photo of a stuffed animal,<sks-bear-plushie>,toy,none
-dreambooth,robot_toy,toy,a photo of sks toy,sks,a photo of a toy,<sks-robot-toy>,toy,none
-dreambooth,teapot,teapot,a photo of sks teapot,sks,a photo of a teapot,<sks-teapot>,teapot,none
-dreambooth,colorful_sneaker,sneaker,a photo of sks sneaker,sks,a photo of a sneaker,<sks-colorful-sneaker>,sneaker,none
-customconcept101,luggage_backpack1,backpack,a photo of sks backpack,sks,a photo of a backpack,<sks-backpack>,backpack,none

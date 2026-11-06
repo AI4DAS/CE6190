@@ -34,6 +34,7 @@ fi
   echo "customconcept101_zip_sha256=$(sha256sum "${CUSTOM_ZIP}" | awk '{print $1}')"
 } > "${PROJECT_ROOT}/results/system/dataset_revisions.txt"
 
-"${ENV_PYTHON}" "${PROJECT_ROOT}/src/data/prepare_pilot.py" --project-root "${PROJECT_ROOT}"
-echo "Datasets downloaded and pilot prepared."
+"${ENV_PYTHON}" "${PROJECT_ROOT}/src/data/prepare_main_subjects.py" \
+  --project-root "${PROJECT_ROOT}"
+echo "Datasets downloaded and all configured benchmark subjects prepared."
 
